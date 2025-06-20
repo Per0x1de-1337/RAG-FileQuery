@@ -1,0 +1,27 @@
+
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: filequery-web
+    command: gunicorn --bind 0.0.0.0:5000 --workers 4 server:app
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      - rag-api
+
+  rag-api:
+    build: .
+    container_name: filequery-rag-api
+    command: python app.py --config_file config.yaml
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    env_file:
+      - .env

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG File Query</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Ask a Question About Your Documents</h1>
+        <p>
+            The RAG API is running in the background. Type your question below and get an answer based on the documents in the <code>/data</code> folder.
+        </p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="flashes">
+              <ul>
+                {% for category, message in messages %}
+                  <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('ask_question') }}" method="post" class="ask-form">
+            <textarea name="question" rows="4" placeholder="e.g., What is the main subject of the content license agreement?">{{ question or '' }}</textarea>
+            <button type="submit">Ask</button>
+        </form>
+
+        {% if answer %}
+        <div class="result">
+            <h3>Your Question:</h3>
+            <p class="question-text">{{ question }}</p>
+            <h3>Answer:</h3>
+            <pre class="answer-text" style="white-space: pre-wrap; word-wrap: break-word;"><code>{{ answer }}</code></pre>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

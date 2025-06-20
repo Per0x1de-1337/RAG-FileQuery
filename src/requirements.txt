@@ -1,0 +1,14 @@
+click
+Flask
+gunicorn
+
+litellm>=1.35
+pathway>=0.11.0
+sentence-transformers
+google-generativeai
+
+unstructured[pdf]
+
+PyYAML
+python-dotenv==1.0.1
+mpmath==1.3.0
