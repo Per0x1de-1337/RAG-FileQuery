@@ -1,4 +1,4 @@
-# Pathway RAG with Gemini
+# RAG-FileQuery
 
 This project implements a complete **Retriever-Augmented Generation (RAG)** pipeline using the **Pathway** framework. It indexes local documents (like PDFs and text files), generates embeddings, and uses **Google's Gemini** model to answer questions based on the content of those documents.
 
